@@ -1,0 +1,36 @@
+Pharm:
+1) 5.1_{Hos_pub1}(Pharm_pub1, "I am willing to pay 1000i for 50 lung cancer patients data, 20i each")
+
+
+Hospital:
+1) Pharm_pub1, "I am willing to pay 1000i for 50 lung cancer patients data, 20i each" <- 5.2_{Hos_pub1} 
+
+2) 5.1_{Patient_pub1}(Hos_pub2, "Pharm is willing to pay...")
+
+
+Patient:
+1) Hos_pub2, "Pharm is willing to pay..." <- 5.2_{Patient_pub1}
+
+2) 7.1("I consent", Patient_pub2)
+
+Hospital:
+3) "I consent", Patient_pub2 <- 7.2()
+
+4) 5.1_{Pharm_pub1}("you can pay now", Patient_pub2)
+
+Pharm:
+2) "you can pay now", Patient_pub2 <- 5.2_{Pharm_pub1}
+
+3) tx_id <- 4_{Patient_pub2}(20i)
+
+4) 7.1("I paid", tx_id, Pharm_pub2)
+
+Hospital:
+5) "I paid", tx_id, Pharm_pub2 <- 7.2()
+
+6) check tx_id
+
+7) 5.1_{Pharm_pub2}("AAA, Lung_Cancer, Alzheimer, Blood_Test, X-Ray, F, 55")
+
+Pharmcy:
+5) "AAA, Lung_Cancer, Alzheimer, Blood_Test, X-Ray, F, 55" <- 5.2_{Pharm_pub2}()
